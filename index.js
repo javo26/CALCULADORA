@@ -20,8 +20,10 @@ botonSeis.addEventListener('click',clickSeis)
 botonSiete.addEventListener('click',clickSiete)
 botonOcho.addEventListener('click',clickOcho)
 botonNueve.addEventListener('click',clickNueve)
-botonCero.addEventListener('click',clickCero)
+botonCero.addEventListenner('click',clickCero)
 botonSuma.addEventListener('click',clickSuma)
+
+
 
 function clickUno(){actual.innerHTML+='1'}
 function clickDos(){actual.innerHTML+='2'}
@@ -37,6 +39,7 @@ function clickCero(){actual.innerHTML+='0'}
 function clickSuma(){
     let valorActual = parseInt(actual.innerHTML)
     let valorResultado = parseInt(resultado.innerHTML)
-    resultado.innerHTML = valorActual + valorResultado
+    resultado.innerHTML = valorResultado + valorActual
     actual.innerHTML = '0'
 }
+
