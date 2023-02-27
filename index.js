@@ -1,3 +1,4 @@
+var Mousetrap = require('mousetrap');
 
 var botonUno = document.getElementById('botonUno')
 var botonDos = document.getElementById('botonDos')
@@ -33,6 +34,21 @@ botonMulti.addEventListener('click',clickMultiplicacion)
 botonDel.addEventListener('click',clickDel)
 botonRegresar.addEventListener('click',clickRegresar)
 
+Mousetrap.bind('1', clickUno)
+Mousetrap.bind('2', clickDos)
+Mousetrap.bind('3', clickTres)
+Mousetrap.bind('4', clickCuatro)
+Mousetrap.bind('5', clickCinco)
+Mousetrap.bind('6', clickSeis)
+Mousetrap.bind('7', clickSiete)
+Mousetrap.bind('8', clickOcho)
+Mousetrap.bind('9', clickNueve)
+Mousetrap.bind('0', clickCero)
+Mousetrap.bind('+', clickSuma)
+Mousetrap.bind('-', clickResta)
+Mousetrap.bind('x', clickMultiplicacion)
+Mousetrap.bind('C', clickDel)
+Mousetrap.bind('backspace', clickRegresar)
 
 function clickUno(){actual.innerHTML+='1'}
 function clickDos(){actual.innerHTML+='2'}
