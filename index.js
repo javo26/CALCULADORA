@@ -1,4 +1,7 @@
-var Mousetrap = require('mousetrap');
+var Mousetrap = require('mousetrap')
+var valorActual
+var valorResultado
+var operacion
 
 var botonUno = document.getElementById('botonUno')
 var botonDos = document.getElementById('botonDos')
@@ -13,10 +16,12 @@ var botonCero = document.getElementById('botonCero')
 var botonSuma = document.getElementById('botonSuma')
 var botonResta = document.getElementById('botonResta')
 var botonMulti = document.getElementById('botonMulti')
+var botonDiv = document.getElementById('botonDiv')
 var actual = document.getElementById('actual')
 var resultado = document.getElementById('resultado')
 var botonDel = document.getElementById('botonDel')
 var botonRegresar = document.getElementById('botonRegresar')
+var botonIgual = document.getElementById('botonIgual')
 
 botonUno.addEventListener('click',clickUno)
 botonDos.addEventListener('click',clickDos)
@@ -31,8 +36,10 @@ botonCero.addEventListener('click',clickCero)
 botonSuma.addEventListener('click',clickSuma)
 botonResta.addEventListener('click',clickResta)
 botonMulti.addEventListener('click',clickMultiplicacion)
+botonDiv.addEventListener('click',clickDivision)
 botonDel.addEventListener('click',clickDel)
 botonRegresar.addEventListener('click',clickRegresar)
+botonIgual.addEventListener('click', clickIgual)
 
 Mousetrap.bind('1', clickUno)
 Mousetrap.bind('2', clickDos)
@@ -62,22 +69,37 @@ function clickNueve(){actual.innerHTML+='9'}
 function clickCero(){actual.innerHTML+='0'}
 
 function clickSuma(){
-    let valorActual = parseInt(actual.innerHTML)
-    let valorResultado = parseInt(resultado.innerHTML)
-    resultado.innerHTML = valorActual + valorResultado
+    valorActual = parseInt(actual.innerHTML)
+    resultado.innerHTML = parseInt(valorActual)
+    operacion = '+'
     actual.innerHTML = '0'
 }
 function clickResta(){
-    let valorResultado = clickSuma()
-    let valorActual = parseInt(actual.innerHTML)
+    valorActual = parseInt(actual.innerHTML)
+    resultado.innerHTML += valorActual
+    operacion = '-'
+    actual.innerHTML = '0'
     
 }
 function clickMultiplicacion(){
-    let valorActual = parseInt(actual.innerHTML)
-    let valorResultado = parseInt(resultado.innerHTML)
-    resultado.innerHTML = valorActual + valorResultado
+    valorActual = parseInt(actual.innerHTML)
+    resultado.innerHTML += parseInt(valorActual)
+    operacion = '*'
     actual.innerHTML = '0'
 }
+function clickDivision(){
+    valorActual = parseInt(actual.innerHTML)
+    resultado.innerHTML += valorActual
+    operacion = '/'
+    actual.innerHTML = '0'
+}
+
+function clickIgual(){
+    valorActual = parseInt(actual.innerHTML)
+    operar()
+    
+}
+
 function clickDel(){
     location.reload()
 }
@@ -86,4 +108,24 @@ function clickRegresar(){
     var valorActual = actual.innerHTML
     valorActual = valorActual.substring(0,valorActual.length -1)
     actual.innerHTML = valorActual
+}
+
+function operar(){
+    var total = 0
+    switch(operacion){
+        case'+':
+            total = parseInt(resultado.innerHTML) + parseInt(valorActual)
+            break
+        case'-':
+            total = parseInt(resultado.innerHTML) - parseInt(valorActual)
+            break
+        case'*':
+            total = parseInt(resultado.innerHTML) * parseInt(valorActual)
+            break
+        case'/':
+            total = parseInt(resultado.innerHTML) / parseInt(valorActual)
+            break
+    }
+    actual.innerHTML = '0'
+    resultado.innerHTML = total
 }
