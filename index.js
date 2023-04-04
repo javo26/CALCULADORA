@@ -22,6 +22,11 @@ var resultado = document.getElementById('resultado')
 var botonDel = document.getElementById('botonDel')
 var botonRegresar = document.getElementById('botonRegresar')
 var botonIgual = document.getElementById('botonIgual')
+var botonHisto = document.getElementById('botonHisto')
+var botonHis = document.getElementById('botonHis')
+var histo = document.getElementById('histo')
+var historial = document.getElementById('historial')
+
 
 botonUno.addEventListener('click',clickUno)
 botonDos.addEventListener('click',clickDos)
@@ -40,6 +45,8 @@ botonDiv.addEventListener('click',clickDivision)
 botonDel.addEventListener('click',clickDel)
 botonRegresar.addEventListener('click',clickRegresar)
 botonIgual.addEventListener('click', clickIgual)
+botonHisto.addEventListener('click', clickHisto)
+botonHis.addEventListener('click', clickHis)
 
 Mousetrap.bind('1', clickUno)
 Mousetrap.bind('2', clickDos)
@@ -57,28 +64,65 @@ Mousetrap.bind('x', clickMultiplicacion)
 Mousetrap.bind('C', clickDel)
 Mousetrap.bind('backspace', clickRegresar)
 
-function clickUno(){actual.innerHTML+='1'}
-function clickDos(){actual.innerHTML+='2'}
-function clickTres(){actual.innerHTML+='3'}
-function clickCuatro(){actual.innerHTML+='4'}
-function clickCinco(){actual.innerHTML+='5'}
-function clickSeis(){actual.innerHTML+='6'}
-function clickSiete(){actual.innerHTML+='7'}
-function clickOcho(){actual.innerHTML+='8'}
-function clickNueve(){actual.innerHTML+='9'}
-function clickCero(){actual.innerHTML+='0'}
+function clickUno(){
+    actual.innerHTML+='1'
+    historial.innerHTML+= '1'
+}
+    
+function clickDos(){
+    actual.innerHTML+='2'
+    historial.innerHTML +='2'
+}
+function clickTres(){
+    actual.innerHTML+='3'
+    historial.innerHTML +='3'
+}
+function clickCuatro(){
+    actual.innerHTML+='4'
+    historial.innerHTML +='4'
+}
+function clickCinco(){
+    actual.innerHTML+='5'
+    historial.innerHTML +='5'
+}
+function clickSeis(){
+    actual.innerHTML+='6'
+    historial.innerHTML +='6'
+}
+function clickSiete(){
+    actual.innerHTML+='7'
+    historial.innerHTML +='7'
+}
+function clickOcho(){
+    actual.innerHTML+='8'
+    historial.innerHTML +='8'
+}
+function clickNueve(){
+    actual.innerHTML+='9'
+    historial.innerHTML +='9'
+}
+function clickCero(){
+    actual.innerHTML+='0'
+    historial.innerHTML +='0'
+}
 
 function clickSuma(){
     valorActual = parseInt(actual.innerHTML)
     resultado.innerHTML = parseInt(valorActual)
     operacion = '+'
     actual.innerHTML = '0'
+    historial.innerHTML +='<br>'
+    historial.innerHTML +='+'
+    historial.innerHTML +='<br>'
 }
 function clickResta(){
     valorActual = parseInt(actual.innerHTML)
     resultado.innerHTML += valorActual
     operacion = '-'
     actual.innerHTML = '0'
+    historial.innerHTML +='<br>'
+    historial.innerHTML +='-'
+    historial.innerHTML +='<br>'
     
 }
 function clickMultiplicacion(){
@@ -86,17 +130,26 @@ function clickMultiplicacion(){
     resultado.innerHTML += parseInt(valorActual)
     operacion = '*'
     actual.innerHTML = '0'
+    historial.innerHTML +='<br>'
+    historial.innerHTML +='x'
+    historial.innerHTML +='<br>'
 }
 function clickDivision(){
     valorActual = parseInt(actual.innerHTML)
     resultado.innerHTML += valorActual
     operacion = '/'
     actual.innerHTML = '0'
+    historial.innerHTML +='<br>'
+    historial.innerHTML +='/'
+    historial.innerHTML +='<br>'
 }
 
 function clickIgual(){
     valorActual = parseInt(actual.innerHTML)
     operar()
+    historial.innerHTML += '<br>'
+    historial.innerHTML += resultado.innerHTML
+    historial.innerHTML += '<br>'
     
 }
 
@@ -108,13 +161,14 @@ function clickRegresar(){
     var valorActual = actual.innerHTML
     valorActual = valorActual.substring(0,valorActual.length -1)
     actual.innerHTML = valorActual
+    historial.innerHTML = valorActual
 }
 
 function operar(){
     var total = 0
     switch(operacion){
         case'+':
-            total = parseInt(resultado.innerHTML) + parseInt(valorActual)
+            total = parseInt(resultado.innerHTML) + parseInt(valorActual)            
             break
         case'-':
             total = parseInt(resultado.innerHTML) - parseInt(valorActual)
@@ -128,4 +182,16 @@ function operar(){
     }
     actual.innerHTML = '0'
     resultado.innerHTML = total
+}
+
+function clickHisto(){
+    document.getElementById('histo').style='display: block'
+    document.getElementById('botonHisto').style='display: none'
+    document.getElementById('botonHis').style='display: block'
+}
+
+function clickHis(){
+    document.getElementById('histo').style='display: none'
+    document.getElementById('botonHisto').style='display: block'
+    document.getElementById('botonHis').style='display: none'
 }
